@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 dotenv.config()
 import userRoute from './routes/userRoute.js'
+import sendEmail from './utils/sendEmail.js'
 
 const app = express()
 
