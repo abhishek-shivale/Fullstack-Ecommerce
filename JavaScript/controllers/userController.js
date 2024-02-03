@@ -140,8 +140,6 @@ export const updateProfile = asyncErrorHandler(async(req,res,next)=>{
     }
 })
 
-//admin 
-
 export const getAlluser = asyncErrorHandler(async (req,res,next)=>{
     const user = await userModel.find()
     res.status(200).json({
