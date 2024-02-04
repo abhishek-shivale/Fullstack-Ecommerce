@@ -118,5 +118,6 @@ const productSchema = new mongoose.Schema({
         default: Date.now
     }
 });
+const productModel = mongoose.model('Product', productSchema);
 
-export const productModel = mongoose.model('Product', productSchema);
+export default productModel
