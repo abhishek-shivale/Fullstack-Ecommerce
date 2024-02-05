@@ -10,9 +10,6 @@ process.on('uncaughtException', (err) => {
 connectDatabase()
 const port = process.env.PORT
 
-
-
-
 app.listen(port,()=>{
     SuccessMsg(`Server is started ${port}`)
 })

@@ -1,6 +1,6 @@
 import { ErrorMsg } from "../utils/customLog.js";
 
-const errorMiddleware = (errorFunction) => {
+const asyncErrorHandler = (errorFunction) => {
     return (req, res, next) => {
         try {
             errorFunction(req, res, next);
@@ -11,4 +11,4 @@ const errorMiddleware = (errorFunction) => {
     };
 };
 
-export default errorMiddleware;
+export default asyncErrorHandler;

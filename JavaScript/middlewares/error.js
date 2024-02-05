@@ -1,6 +1,6 @@
-const ErrorHandler = require("../utils/errorHandler");
+import ErrorHandler from "../utils/errorHandler.js"
 
-export const Error= (err,req,res,next)=>{
+const Error= (err,req,res,next)=>{
     err.statusCode = err.statusCode || 500;
     err.message = err.message || "Internal Server Error";
     if(err.name === "CastError"){
@@ -24,3 +24,4 @@ export const Error= (err,req,res,next)=>{
         message: err.message,
     });
 }
+export default Error

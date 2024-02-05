@@ -1,6 +1,6 @@
 import asyncErrorHandler from  '../middlewares/asyncErrorHandler.js'
 import { orderModel } from '../models/orderModel.js'
-import { productModel } from '../models/productModel.js'
+import  productModel  from '../models/productModel.js'
 import ErrorHandler from '../utils/errorHandler.js'
 import sendEmail from '../utils/sendEmail.js'
 
@@ -39,7 +39,6 @@ export const newOrder = asyncErrorHandler(async(req,res,next)=>{
         order,
     });
 })
-
 
 export const getSingleOrderDetails = asyncErrorHandler(async(req,res,next)=>{
     const order = await orderModel.findById(req.parms.id).populate("user","name email")

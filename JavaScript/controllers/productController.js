@@ -5,7 +5,7 @@ import ErrorHandler from '../utils/errorHandler.js'
 import cloudinary from 'cloudinary'
 
 
-export const gstAllProducts = asyncErrorHandler(async (req, res, next)=>{
+export const getAllProducts = asyncErrorHandler(async (req, res, next)=>{
     const resultPerPage = 12
     const productsCount = await productModel.countDocuments();
     const searchFeature = new SearchFeature(productModel.find(), req.query)
