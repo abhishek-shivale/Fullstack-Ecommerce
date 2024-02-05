@@ -5,15 +5,17 @@ import sendToken from "../utils/sendToken.js";
 import asyncErrorHandler from "../middlewares/asyncErrorHandler.js"
 import crypto from "crypto"
 import cloudinary from 'cloudinary'
+import { log } from 'console';
  
 export const registerUser = asyncErrorHandler(async(req,res,next)=>{
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avater,{
+    console.log(req.body.avater)
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.avater.url,{
         folder: "avatars",
         width: 150,
         crop: "scale",
     })
     const {name,email,gender,password} = req.body
-    const user = new userModel.create({
+    const user = await userModel.create({
         name,
         email,
         gender,
@@ -23,11 +25,13 @@ export const registerUser = asyncErrorHandler(async(req,res,next)=>{
             url : myCloud.url
         }
     })
+    
     sendToken(user,201,res)
 })
 
 export const loginUser = asyncErrorHandler(async(req,res,next)=>{
-    const {email, password} = req.body;
+    // console.log(req.body);
+    const {email,password} = req.body;
     if(!email || !password){
         return next(new ErrorHandler("please Enter Email and Password",400))
     }

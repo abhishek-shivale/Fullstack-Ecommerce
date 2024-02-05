@@ -1,21 +1,29 @@
 import app from './app.js'
+import cloudinary from 'cloudinary'
 import connectDatabase from './config/database.js';
-import { SuccessMsg } from './utils/customLog.js';
+import { SuccessMsg, ErrorMsg } from './utils/customLog.js';
 
 process.on('uncaughtException', (err) => {
-    console.log(`Error: ${err.message}`);
+    ErrorMsg(`Error: ${err}`);
     process.exit(1);
 });
 
 connectDatabase()
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 const port = process.env.PORT
 
-app.listen(port,()=>{
+const server = app.listen(port,()=>{
     SuccessMsg(`Server is started ${port}`)
 })
 
 process.on('unhandledRejection', (err) => {
-    console.log(`Error: ${err.message}`);
+    ErrorMsg(`Error: ${err}`);
     server.close(() => {
         process.exit(1);
     });
